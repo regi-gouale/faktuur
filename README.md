@@ -1,135 +1,93 @@
-# Turborepo starter
+# Faktuur.io Monorepo
 
-This Turborepo starter is maintained by the Turborepo core team.
+![CI](https://github.com/regi-gouale/faktuur/actions/workflows/ci.yml/badge.svg)
 
-## Using this example
+Faktuur.io est un SaaS de facturation destiné aux petites entreprises qui gèrent encore leurs devis et factures dans des outils génériques. Le projet vit dans un monorepo Turborepo/PNPM et alimente :
 
-Run the following command:
+- **`apps/web`** – application Next.js 15 (React 19, React Server Components, Server Actions) pour créer, envoyer et suivre les documents de facturation.
+- **`apps/docs`** – site de documentation produit généré avec Next.js.
+- **`packages/ui`** – design system réutilisable (Shadcn UI, TailwindCSS, composants partagés).
+- **`packages/shared`** _(à venir)_ – modules métiers communs (validation Zod, contrats de données).
+- **`apps/api`** _(à venir)_ – backend AdonisJS + Better-auth exposant un Data Access Layer sécurisé.
 
-```sh
-npx create-turbo@latest
+## Pourquoi Faktuur.io est utile
+
+- Génération et envoi de devis/factures PDF conformes.
+- Suivi des paiements (total/partiel) et relances automatiques par email.
+- Mini CRM pour gérer comptes, clients et contacts.
+- Séparation stricte des responsabilités : aucune requête base de données depuis le front, tout passe par le backend.
+
+## Getting Started
+
+### Prérequis
+
+- Node.js >= 18
+- PNPM 10 (via `corepack enable` ou `npm install -g pnpm`)
+
+### Installation
+
+```bash
+pnpm install
 ```
 
-## What's inside?
+### Lancer les applications
 
-This Turborepo includes the following packages/apps:
+```bash
+# Démarrer toutes les applications en parallèle (frontend + docs)
+pnpm dev
 
-### Apps and Packages
+# Cibler uniquement l'app web
+pnpm turbo run dev --filter=web
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+# Lancer le backend (dès qu'il sera disponible)
+pnpm turbo run dev --filter=api
 ```
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+### Qualité du code
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
+```bash
+# Lint global
+pnpm lint
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+# Vérification TypeScript
+pnpm check-types
 
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+# Formatage Prettier
+pnpm format
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+> Les commits déclenchent un hook `lint-staged` (ESLint + Prettier) et la CI GitHub Actions exécute lint + type-check.
+
+### Structure du dépôt
 
 ```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+apps/
+  web/         # Frontend Next.js (RSC, Shadcn UI, Zustand, nuqs)
+  docs/        # Documentation produit
+  api/         # Backend AdonisJS (Better-auth, DAL) – à venir
+packages/
+  ui/          # Bibliothèque de composants partagée
+  eslint-config/
+  typescript-config/
+  shared/      # Modules métiers communs – à construire
 ```
 
-### Remote Caching
+Consultez `plan.md` pour suivre les phases de livraison et priorités courantes.
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+## Aide & Documentation
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+- Roadmap et tâches : [`plan.md`](plan.md)
+- Conventions d'architecture et de code : `.github/instructions/copilot-instructions.md`
+- Documentation produit : `apps/docs` (déploiement en cours)
+- Support : ouvrez une issue GitHub ou discutez via l'onglet Discussions.
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+## Mainteneurs & Contributions
 
-```
-cd my-turborepo
+Le projet est maintenu par **Regi Gouale** et l'équipe Faktuur.io.
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
+1. Créez une branche depuis `fundation`.
+2. Implémentez votre fonctionnalité en respectant les conventions TypeScript et RSC.
+3. Ajoutez des tests pour le DAL, les services ou composants critiques.
+4. Ouvrez une Pull Request en référencent les tâches pertinentes de `plan.md`.
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+Pour toute contribution significative, démarrez une issue afin d'aligner la feuille de route.
