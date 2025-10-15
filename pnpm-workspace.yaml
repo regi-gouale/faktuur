@@ -1,0 +1,10 @@
+packages:
+  # Applications
+  - "apps/web"
+  - "apps/api"
+  - "apps/docs"
+  # Shared packages
+  - "packages/shared/*"
+  - "packages/ui"
+  - "packages/eslint-config"
+  - "packages/typescript-config"
