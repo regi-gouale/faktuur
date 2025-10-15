@@ -12,7 +12,7 @@
 
 ## Phase 2 – Authentification & Sécurité
 
-- ❌ Installer AdonisJS dans le workspace backend
+- ✅ Installer AdonisJS dans le workspace backend
 - ❌ Intégrer Better-auth et définir les modèles d'utilisateur/compte
 - ❌ Configurer la protection des Server Actions Next.js avec Better-auth
 - ❌ Définir les rôles et permissions de base dans le backend
