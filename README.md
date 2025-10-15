@@ -85,7 +85,7 @@ Consultez `plan.md` pour suivre les phases de livraison et priorités courantes.
 
 Le projet est maintenu par **Regi Gouale** et l'équipe Faktuur.io.
 
-1. Créez une branche depuis `fundation`.
+1. Créez une branche depuis `foundation`.
 2. Implémentez votre fonctionnalité en respectant les conventions TypeScript et RSC.
 3. Ajoutez des tests pour le DAL, les services ou composants critiques.
 4. Ouvrez une Pull Request en référencent les tâches pertinentes de `plan.md`.
