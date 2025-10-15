@@ -5,10 +5,15 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types"
+    "format": "prettier --write .",
+    "check-types": "turbo run check-types",
+    "lint:staged": "lint-staged",
+    "prepare": "husky"
   },
   "devDependencies": {
+    "eslint": "^9.34.0",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
     "prettier": "^3.6.2",
     "turbo": "latest",
     "typescript": "5.9.2"

@@ -7,7 +7,7 @@
 - ✅ Initialiser la structure Turborepo (apps, packages, shared)
 - ✅ Configurer `pnpm-workspace.yaml` avec front, back et packages partagés
 - ✅ Ajouter la configuration TypeScript de base (tsconfig racine + références)
-- ❌ Mettre en place ESLint, Prettier et lint-staged adaptés au monorepo
+- ✅ Mettre en place ESLint, Prettier et lint-staged adaptés au monorepo
 - ❌ Configurer CI initiale (lint, type-check) via GitHub Actions
 
 ## Phase 2 – Authentification & Sécurité
