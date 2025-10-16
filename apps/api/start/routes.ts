@@ -23,3 +23,15 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.get('/', async () => {
   return { hello: 'world' }
 })
+
+Route.group(() => {
+  Route.get('session', async ({ auth }) => {
+    await auth.authenticate()
+
+    const user = auth.user!
+
+    return {
+      user: user.serialize(),
+    }
+  }).middleware('auth')
+}).prefix('auth')

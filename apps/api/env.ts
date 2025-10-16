@@ -21,6 +21,7 @@ export default Env.rules({
   APP_NAME: Env.schema.string(),
   DRIVE_DISK: Env.schema.enum(['local'] as const),
   NODE_ENV: Env.schema.enum(['development', 'production', 'test'] as const),
+  SESSION_DRIVER: Env.schema.enum(['cookie', 'memory'] as const),
   DB_CONNECTION: Env.schema.enum(['sqlite', 'mysql', 'pg', 'mssql', 'oracle'] as const),
   MYSQL_HOST: Env.schema.string.optional({ format: 'host' }),
   MYSQL_PORT: Env.schema.number.optional(),

@@ -5,9 +5,9 @@
  * file.
  */
 
-import type { Config } from '@japa/runner'
 import TestUtils from '@ioc:Adonis/Core/TestUtils'
-import { assert, runFailedTests, specReporter, apiClient } from '@japa/preset-adonis'
+import { apiClient, assert, runFailedTests, specReporter } from '@japa/preset-adonis'
+import type { Config } from '@japa/runner'
 
 /*
 |--------------------------------------------------------------------------
@@ -65,5 +65,6 @@ export const runnerHooks: Pick<Required<Config>, 'setup' | 'teardown'> = {
 export const configureSuite: Required<Config>['configureSuite'] = (suite) => {
   if (suite.name === 'functional') {
     suite.setup(() => TestUtils.httpServer().start())
+    suite.setup(() => TestUtils.db().migrate())
   }
 }
